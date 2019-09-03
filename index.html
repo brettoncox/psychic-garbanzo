@@ -1,9 +1,87 @@
+<html>
+<head>
 Hello at September 2, 2019 2:38 PM
 Added gitignore on September 2, 2019 at 3:19 PM
+<br>
+<br>
+<script
+type="text/javascript"
+src="//code.jquery.com/jquery-1.9.1.js"
 
-<p>Date/Time: <span id="datetime"></span></p>
+></script>
+
+<link rel="stylesheet" type="text/css" href="/css/result-light.css">
+
+  <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/moment.js/2.5.1/moment.min.js"></script>
+
+<style id="compiled-css" type="text/css">
+  .time-frame {
+background-color: #000000;
+color: #ffffff;
+width: 300px;
+font-family: Arial;
+}
+
+.time-frame > div {
+width: 100%;
+text-align: center;
+}
+
+#date-part {
+font-size: 1.2em;
+}
+#time-part {
+font-size: 2em;
+}
+</style>
+
+
+<!-- TODO: Missing CoffeeScript 2 -->
+
+<script type="text/javascript">//<![CDATA[
+
+$(window).load(function(){
+  
+$(document).ready(function() {
+var interval = setInterval(function() {
+    var momentNow = moment();
+    $('#date-part').html(momentNow.format('YYYY MMMM DD') + ' '
+                        + momentNow.format('dddd')
+                         .substring(0,3).toUpperCase());
+    $('#time-part').html(momentNow.format('A hh:mm:ss'));
+}, 100);
+
+$('#stop-interval').on('click', function() {
+    clearInterval(interval);
+});
+});
+
+});
+
+//]]></script>
+
+</head>
+<body>
+<div class='time-frame'>
+<div id='date-part'></div>
+<div id='time-part'></div>
+</div>
+<br>
+<input type='button' id='stop-interval' value='Stop time' />
+
 
 <script>
-var dt = new Date();
-document.getElementById("datetime").innerHTML = (("0"+(dt.getMonth()+1)).slice(-2)) +"/"+ (("0"+dt.getDate()).slice(-2)) +"/"+ (dt.getFullYear()) +" "+ (("0"+dt.getHours()+1).slice(-2)) +":"+ (("0"+dt.getMinutes()+1).slice(-2));
+// tell the embed parent frame the height of the content
+if (window.parent && window.parent.parent){
+  window.parent.parent.postMessage(["resultsFrame", {
+    height: document.body.getBoundingClientRect().height,
+    slug: "zf80q3nh"
+  }], "*")
+}
+
+// always overwrite window.name, in case users try to set it manually
+window.name = "result"
 </script>
+</body>
+</html>
+
